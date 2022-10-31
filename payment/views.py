@@ -17,17 +17,21 @@ def home(request):
     template_name = 'home.html'
     payment_form = PaymentForm()
     if request.method == "POST":
+        payment_form = PaymentForm(request.POST, request.FILES)
+        amount = 0
+        if payment_form.is_valid():
+            amount=payment_form.cleaned_data['amount']
+            # print('=========>> ', type(amount))
+        # print('=========>> ', payment_form.get['amount'])
         status_url = request.build_absolute_uri(reverse('status'))
         success_url = request.build_absolute_uri(reverse('success'))
         fail_url = request.build_absolute_uri(reverse('fail'))
         cancel_url = request.build_absolute_uri(reverse('cancel'))
-        # print('status url ==============> ', status_url)
-        # print('status url ==============> ', success_url)
         mypayment = SSLCSession(
             sslc_is_sandbox=True, sslc_store_id=STORE_ID, sslc_store_pass=STORE_KEY)
         mypayment.set_urls(success_url=success_url, fail_url=fail_url,
                            cancel_url=cancel_url, ipn_url=status_url)  # ipn_url= notification
-        mypayment.set_product_integration(total_amount=Decimal('20.20'), currency='BDT', product_category='clothing',
+        mypayment.set_product_integration(total_amount=Decimal(amount), currency='BDT', product_category='clothing',
                                           product_name='demo-product', num_of_item=2, shipping_method='YES', product_profile='None')
         mypayment.set_customer_info(name='John Doe', email='johndoe@email.com', address1='demo address',
                                     address2='demo address 2', city='Dhaka', postcode='1207', country='Bangladesh', phone='01713447790')
@@ -36,7 +40,6 @@ def home(request):
         response_data = mypayment.init_payment()
         # print('========= >>>>>>>  ', response_data)
         return redirect(response_data['GatewayPageURL'])
-        # return redirect('https://sandbox.sslcommerz.com/EasyCheckOut/testcdecb531862bddf05aa7b070994f5efaef5')
 
     context = {
         'payment_form': payment_form,
@@ -45,8 +48,6 @@ def home(request):
 
 
 # ssl status for payment
-
-
 @csrf_exempt
 def ssl_status(request):
     template_name = 'status.html'
