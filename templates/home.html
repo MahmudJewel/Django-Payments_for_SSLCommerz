@@ -1,34 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
-
-    <!-- Bootstrap CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-</head>
-
-<body class="container">
-    <br><br><br>
-    <h2 class="text-center">Payment Method</h2>
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-6">
-                {{ payment_form.as_p }}
-            </div>
-            <br> <br>
-            <div class="text-center">
-                <button class="btn btn-primary" type="Submit">Submit</button>
-            </div>
+{% extends 'base.html' %}
+{% block content %}
+<br><br><br>
+<h2 class="text-center">Payment Method</h2>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            {{ payment_form.as_p }}
         </div>
-    </form>
-    <!-- {{ payment_form.as_p }} -->
+        <br> <br>
+        <div class="text-center">
+            <button class="btn btn-primary" type="Submit">Submit</button>
+        </div>
+    </div>
+</form>
 
-</body>
-
-</html>
+{% endblock %}
