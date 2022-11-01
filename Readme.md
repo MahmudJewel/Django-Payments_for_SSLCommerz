@@ -1,9 +1,9 @@
 ﻿# Payment Integrations SSLCOMMERZ
 ## PIP package
-[PIP Package](https://pypi.org/project/sslcommerz-python/)
+Click [here](https://pypi.org/project/sslcommerz-python/) to install pip package.
 
 ## Doc
-[Documents](https://developer.sslcommerz.com/doc/v4/#technical-or-backend-integration-process)
+Click [here](https://developer.sslcommerz.com/doc/v4/#technical-or-backend-integration-process) to read the documents
 
 # Tools
 ### Back-end
