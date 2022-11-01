@@ -3,7 +3,7 @@ from .models import Payment
 
 
 class PaymentForm(forms.ModelForm):
-    amount = forms.IntegerField(required=False, widget=forms.NumberInput(
+    amount = forms.IntegerField(required=True, widget=forms.NumberInput(
         attrs={"class": "form-control", "placeholder": "Amount in tk"}))
     address = forms.CharField(required=False, widget=forms.Textarea(
         attrs={"class": "form-control", "placeholder": "Address"}))
